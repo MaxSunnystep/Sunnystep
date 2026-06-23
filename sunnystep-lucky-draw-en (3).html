@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Sunnystep Lucky Draw</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body {
+  background: #FAFAF8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page {
+  width: 100%;
+  max-width: 420px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+.brand { font-size: 11px; letter-spacing: 0.14em; color: #888780; text-transform: uppercase; margin-bottom: 6px; }
+.headline { font-size: 30px; font-weight: 700; color: #1A1A18; margin-bottom: 4px; }
+.subline { font-size: 15px; color: #5F5E5A; margin-bottom: 2rem; }
+
+.machine {
+  width: 220px;
+  background: #F1EFE8;
+  border: 2px solid #C8C6BE;
+  border-radius: 20px 20px 10px 10px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+.globe {
+  background: #E0EFFF;
+  border-bottom: 2px solid #B5D4F4;
+  padding: 24px 16px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.ball {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  border: 2px solid rgba(0,0,0,0.12);
+}
+.lower {
+  padding: 20px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.push-btn {
+  width: 88px; height: 88px;
+  border-radius: 50%;
+  background: #1A1A18;
+  border: none;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+.push-btn span { display: block; }
+.push-btn .big { font-size: 15px; font-weight: 700; }
+.push-btn .small { font-size: 9px; letter-spacing: 0.08em; opacity: 0.5; }
+.slot { width: 48px; height: 20px; background: #333; border-radius: 10px; }
+.legs { display: flex; justify-content: space-between; padding: 0 30px; background: #F1EFE8; }
+.leg { width: 16px; height: 18px; background: #E0DED6; border: 1px solid #C8C6BE; border-top: none; border-radius: 0 0 5px 5px; }
+
+.hint { font-size: 12px; color: #888780; }
+
+.result { display: none; flex-direction: column; align-items: center; }
+.result.show { display: flex; }
+.prize-ball {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 52px;
+  margin-bottom: 1.25rem;
+  border: 3px solid #ccc;
+}
+.won-label { font-size: 12px; color: #888780; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.prize-name { font-size: 34px; font-weight: 700; color: #1A1A18; margin-bottom: 6px; }
+.prize-desc { font-size: 15px; color: #5F5E5A; line-height: 1.5; margin-bottom: 2rem; white-space: pre-line; }
+.next-btn {
+  background: transparent;
+  color: #1A1A18;
+  border: 2px solid #C8C6BE;
+  border-radius: 999px;
+  padding: 12px 32px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div id="idle">
+    <p class="brand">Sunnystep</p>
+    <p class="headline">Lucky Draw 🎰</p>
+    <p class="subline">Push the button after checkout!</p>
+
+    <div class="machine" id="machine">
+      <div class="globe">
+        <div class="ball" style="background:#EEEDFE;border-color:#7F77DD">👟</div>
+        <div class="ball" style="background:#E1F5EE;border-color:#5DCAA5">✈️</div>
+        <div class="ball" style="background:#FAEEDA;border-color:#EF9F27">🧦</div>
+        <div class="ball" style="background:#FBEAF0;border-color:#ED93B1">🎁</div>
+        <div class="ball" style="background:#EEEDFE;border-color:#7F77DD">👟</div>
+      </div>
+      <div class="lower">
+        <button class="push-btn" id="pushBtn">
+          <span class="big">Push</span>
+          <span class="small">TRY YOUR LUCK</span>
+        </button>
+        <div class="slot"></div>
+      </div>
+    </div>
+    <div class="legs"><div class="leg"></div><div class="leg"></div></div>
+
+    <p class="hint" style="margin-top:1rem">One draw per customer</p>
+  </div>
+
+  <div class="result" id="result">
+    <div class="prize-ball" id="prizeBall"></div>
+    <p class="won-label">You won</p>
+    <p class="prize-name" id="prizeName"></p>
+    <p class="prize-desc" id="prizeDesc"></p>
+    <button class="next-btn" id="nextBtn">Next customer ↩</button>
+  </div>
+
+</div>
+
+<script>
+var prizes = [
+  { name:"Shoelaces",     icon:"👟", desc:"A free pair of Sunnystep shoelaces!", w:30, bg:"#EEEDFE", bc:"#7F77DD" },
+  { name:"Travel Pillow", icon:"✈️", desc:"A Sunnystep travel pillow, all yours!", w:25, bg:"#E1F5EE", bc:"#5DCAA5" },
+  { name:"Socks",         icon:"🧦", desc:"A pair of comfy Sunnystep socks!", w:30, bg:"#FAEEDA", bc:"#EF9F27" },
+  { name:"RM 88 OFF",     icon:"🎁", desc:"RM88 off your next purchase!\nShow this to our team to redeem.", w:15, bg:"#FBEAF0", bc:"#ED93B1" }
+];
+
+function pick() {
+  var t = 0, i; for(i=0;i<prizes.length;i++) t+=prizes[i].w;
+  var r = Math.random()*t;
+  for(i=0;i<prizes.length;i++){ r-=prizes[i].w; if(r<=0) return prizes[i]; }
+  return prizes[0];
+}
+
+var busy = false;
+
+function shake(el, done) {
+  var steps = [0,-7,7,-6,6,-4,4,-2,2,0], i=0;
+  function next() {
+    el.style.marginLeft = steps[i]+'px';
+    i++;
+    if(i < steps.length) setTimeout(next, 45);
+    else { el.style.marginLeft='0'; setTimeout(done, 100); }
+  }
+  next();
+}
+
+function show() {
+  var p = pick();
+  document.getElementById('prizeBall').textContent = p.icon;
+  document.getElementById('prizeBall').style.background = p.bg;
+  document.getElementById('prizeBall').style.borderColor = p.bc;
+  document.getElementById('prizeName').textContent = p.name;
+  document.getElementById('prizeDesc').textContent = p.desc;
+  document.getElementById('idle').style.display = 'none';
+  document.getElementById('result').style.display = 'flex';
+}
+
+function reset() {
+  busy = false;
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('idle').style.display = 'block';
+  document.getElementById('pushBtn').style.opacity = '1';
+}
+
+document.getElementById('pushBtn').onclick = function() {
+  if(busy) return; busy = true;
+  this.style.opacity = '0.4';
+  shake(document.getElementById('machine'), show);
+};
+
+document.getElementById('nextBtn').onclick = function() { reset(); };
+</script>
+</body>
+</html>
