@@ -118,12 +118,12 @@ body {
     <p class="subline">Push the button after checkout!</p>
     <div class="machine" id="machine">
       <div class="globe">
-        <div class="ball" style="background:#EEEDFE;border-color:#7F77DD">👟</div>
-        <div class="ball" style="background:#FAEEDA;border-color:#EF9F27">🧦</div>
-        <div class="ball" style="background:#E1F5EE;border-color:#5DCAA5">✈️</div>
         <div class="ball" style="background:#FBEAF0;border-color:#ED93B1">🎁</div>
         <div class="ball" style="background:#D6EEF8;border-color:#4AAFD5">💧</div>
         <div class="ball" style="background:#DFF5E1;border-color:#4CAF72">🫙</div>
+        <div class="ball" style="background:#E8F0E0;border-color:#7AAD50">🧴</div>
+        <div class="ball" style="background:#FAEEDA;border-color:#EF9F27">🧦</div>
+        <div class="ball" style="background:#EEEDFE;border-color:#7F77DD">👟</div>
       </div>
       <div class="lower">
         <button class="push-btn" id="pushBtn">
@@ -146,12 +146,12 @@ body {
 </div>
 <script>
 var prizes = [
-  { name:"Shoelaces",              icon:"👟", desc:"A free pair of Sunnystep shoelaces!", w:20, bg:"#EEEDFE", bc:"#7F77DD" },
+  { name:"RM88 Gift Card",         icon:"🎁", desc:"RM88 Gift Card for your next purchase!\nShow this to our team to redeem.", w:10, bg:"#FBEAF0", bc:"#ED93B1" },
+  { name:"Water Bottle",           icon:"💧", desc:"A Sunnystep insulated water bottle!", w:15, bg:"#D6EEF8", bc:"#4AAFD5" },
+  { name:"Tritan Water Bottle",    icon:"🫙", desc:"A Sunnystep Tritan water bottle!", w:15, bg:"#DFF5E1", bc:"#4CAF72" },
+  { name:"Shoe Cleaner",           icon:"🧴", desc:"A Sunnystep shoe cleaner, yours to keep!", w:20, bg:"#E8F0E0", bc:"#7AAD50" },
   { name:"Socks",                  icon:"🧦", desc:"A pair of comfy Sunnystep socks!", w:20, bg:"#FAEEDA", bc:"#EF9F27" },
-  { name:"Travel Pillow",          icon:"✈️", desc:"A Sunnystep travel pillow, all yours!", w:10, bg:"#E1F5EE", bc:"#5DCAA5" },
-  { name:"RM 88 OFF",              icon:"🎁", desc:"RM88 off your next purchase!\nShow this to our team to redeem.", w:10, bg:"#FBEAF0", bc:"#ED93B1" },
-  { name:"Insulated Water Bottle", icon:"💧", desc:"A Sunnystep insulated water bottle!", w:20, bg:"#D6EEF8", bc:"#4AAFD5" },
-  { name:"Tritan Water Bottle",    icon:"🫙", desc:"A Sunnystep Tritan water bottle!", w:20, bg:"#DFF5E1", bc:"#4CAF72" }
+  { name:"Shoelaces",              icon:"👟", desc:"A free pair of Sunnystep shoelaces!", w:20, bg:"#EEEDFE", bc:"#7F77DD" }
 ];
 function pick() {
   var t = 0, i; for(i=0;i<prizes.length;i++) t+=prizes[i].w;
